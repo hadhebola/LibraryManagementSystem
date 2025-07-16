@@ -55,7 +55,7 @@ namespace LibraryManagementSystem.Api.Middlewares
                     var currPos = memoryStream.Position;
 
                     // here we are tracking system error so that we can interpret the message to selectd language
-                    var data = (JObject)JsonConvert.DeserializeObject(responseBodyText);
+                    var data = (JObject)JsonConvert.DeserializeObject(responseBodyText)!;
                     try
                     {
                         if (data?["response"] != null)

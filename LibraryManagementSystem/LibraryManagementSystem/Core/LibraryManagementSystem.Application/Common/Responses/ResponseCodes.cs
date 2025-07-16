@@ -22,10 +22,5 @@ namespace LibraryManagementSystem.Application.Common.Responses
         public const string INVALID_LANGUAGE_CODE = "E10";
         public const string INVALID_COUNTRY_CODE = "E11";
         public const string UNUTHORIZED = "E77";
-        
-
-
-
-
     }
 }
