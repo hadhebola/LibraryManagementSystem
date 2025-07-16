@@ -56,13 +56,25 @@ namespace LibraryManagementSystem.Api.Middlewares
 
                     // here we are tracking system error so that we can interpret the message to selectd language
                     var data = (JObject)JsonConvert.DeserializeObject(responseBodyText);
-                    String code = data["response"].Value<string>("code");
-
-                    if (code == "E1000")
+                    try
                     {
-                        var msg = _messageProvider.GetMessage(code);
-                        data["response"]["description"] = msg;
-                        responseBodyText = data.ToString();
+                        if (data?["response"] != null)
+                        {
+                            String code = data!["response"]?.Value<string>("code") ?? "";
+
+                            if (code == "E1000")
+                            {
+                                var msg = _messageProvider.GetMessage(code);
+                                data["response"]!["description"] = msg;
+                                responseBodyText = data.ToString();
+                            }
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+
+
                     }
 
                     var encryptedData = GeneralUtil.Encryptor(responseBodyText, _settings.EncryptionKey);
